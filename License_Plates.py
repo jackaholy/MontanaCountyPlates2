@@ -16,7 +16,7 @@ def read_file(file):
                 county_seat = info[1]
                 county_number = info[2]
                 # Store the county information in the dictionary
-                county_data[county_number] = (county_seat, county_name)
+                county_data[county_seat] = (county_name, county_number)
 
     except FileNotFoundError:
         print(f"Error: The file '{file}' cannot be found.")
@@ -24,27 +24,27 @@ def read_file(file):
         print(f"Error: Unable to read the file '{file}'.")
 
 
-def choose_county_number():
+def choose_county_name():
     while True:
-        chosen_number = input("Please enter a Montana county number (enter 'quit' to exit): ")
+        chosen_city = input("Please enter a Montana county name (enter 'quit' to exit): ")
         # If the number matches a key in the dictionary get the data from that entry
-        if chosen_number in county_data:
-            county_info = county_data[chosen_number]
-            print(f"County Number: {chosen_number}\n"
+        if chosen_city in county_data:
+            county_info = county_data[chosen_city]
+            print(f"County Number: {chosen_city}\n"
                   f"County Name: {county_info[1]}\n"
                   f"County Seat: {county_info[0]}")
         # If they type 'quit', exit the program
-        elif chosen_number.lower() == "quit":
+        elif chosen_city.lower() == "quit":
             sys.exit(0)
-        elif chosen_number not in county_data:
-            print("Invalid county number.")
+        elif chosen_city not in county_data:
+            print("Invalid county name.")
         else:
             print("Invalid input.")
 
 
 def main():
     read_file("MontanaCounties.csv")
-    choose_county_number()
+    choose_county_name()
 
 
 if __name__ == "__main__":
